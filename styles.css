@@ -21,6 +21,7 @@ body {
     padding: 0 5%; /* Add some padding for spacing */
 }
 
+/* Logo styles */
 .center-logo {
     position: relative;
     left: 60px;
@@ -36,28 +37,14 @@ body {
     transform: scale(1.05); /* Slightly scale up the logo */
 }
 
-.back-text {
-    font-family: 'Courier New', sans-serif;
-    text-transform: lowercase;
-    font-size: 16px;
-    color: #cccccc;
-    display: flex; /* Add this to enable flexbox layout */
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Center items horizontally (optional for text alignment) */
-    text-align: center;
-    height: 100%; /* Ensure the container has height for vertical centering */
-    position: absolute; /* Absolute positioning might be necessary depending on your layout */
-    top: 0; /* Anchor the element to the top */
-    bottom: 0; /* Stretch the element to the bottom */
-}
-
-
+/* Links section */
 .links {
     position: relative;
     width: 40%; /* Occupy 40% of the width */
     text-align: left; /* Align links to the left */
 }
 
+/* Link styles */
 .links a {
     color: #cccccc;
     text-decoration: none;
@@ -70,4 +57,32 @@ body {
 
 .links a:hover {
     color: #d3d2d2; /* Change text color on hover */
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    /* Adjust logo for mobile */
+    .center-logo {
+        left: 0; /* Remove the left positioning */
+        width: 70%; /* Resize logo to fit smaller screens */
+        max-width: 600px; /* Limit max size on mobile */
+    }
+
+    /* Stack links vertically and center them on mobile */
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 5%; /* Adjust padding for mobile view */
+    }
+
+    .links {
+        width: 100%; /* Make links take up full width */
+        text-align: center; /* Center-align links */
+        margin-top: 20px; /* Space between logo and links */
+    }
+
+    .links a {
+        font-size: 1.2em; /* Reduce font size on mobile */
+        margin: 15px 0; /* Increase spacing between links */
+    }
 }
