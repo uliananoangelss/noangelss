@@ -63,7 +63,7 @@ body {
 @media (max-width: 768px) {
     /* Adjust logo for mobile */
     .center-logo {
-        left: 50px; /* Remove the left positioning */
+        left: 0; /* Remove the left positioning */
         width: 70%; /* Resize logo to fit smaller screens */
         max-width: 600px; /* Limit max size on mobile */
     }
