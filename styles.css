@@ -72,6 +72,7 @@ body {
     .container {
         flex-direction: column;
         align-items: center;
+        justify-content: flex-start; /* Ensure the logo is at the top */
         padding: 20px 5%; /* Adjust padding for mobile view */
     }
 
@@ -86,3 +87,4 @@ body {
         margin: 15px 0; /* Increase spacing between links */
     }
 }
+
