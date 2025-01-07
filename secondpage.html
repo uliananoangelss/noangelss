@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Releases</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-color: black; /* Solid black background */
+            font-family: 'Courier New', sans-serif;
+            text-transform: lowercase;
+            color: #cccccc;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative; /* Allows absolute positioning of child elements */
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 720px; /* Adjust to your preferred width */
+            height: 480px; /* Set a height for the carousel */
+            overflow: hidden; /* Hide the images that are out of view */
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .carousel-item {
+            flex: 0 0 100%; /* Ensure each item takes up 100% of the container's width */
+            display: flex;
+            flex-direction: column; /* Stack image and description vertically */
+            justify-content: center;
+            align-items: center;
+            width: 100%; /* Make sure each item is 100% wide */
+        }
+
+        .carousel img {
+            width: 100%; /* Make image fill the width of the container */
+            height: auto; /* Keep aspect ratio */
+            object-fit: cover; /* Ensure image is contained within the box */
+        }
+
+        /* Style for description below the image */
+        .carousel-description {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 16px;
+            padding: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            width: 100%; /* Take full width below the image */
+            text-align: center;
+            height: 50px; /* Set a fixed height for all descriptions */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Style for the last carousel item as a link */
+        .carousel-item:last-child img {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>   
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-item">
+                <img src="noangelss_card_1.jpg" alt="noangelss_card_1">
+                <div class="carousel-description">NOANGELSS business card (front)</div>
+            </div>
+            <div class="carousel-item">
+                <img src="noangelss_card_2.jpg" alt="noangelss_card_2">
+                <div class="carousel-description">NOANGELSS business card (back)</div>
+            </div>
+            <div class="carousel-item">
+                <img src="noangelss_carddamna_1.jpg" alt="noangelss_carddamna_1">
+                <div class="carousel-description">damnastya business card (front)</div>
+            </div>
+            <div class="carousel-item">
+                <img src="noangelss_carddamna_2.jpg" alt="noangelss_carddamna_2">
+                <div class="carousel-description">damnastya business card (back)</div>
+            </div>
+            <div class="carousel-item">
+                <img src="noangelss_x_cuffed_1.jpg" alt="noangelss_x_cuffed_1">
+                <div class="carousel-description">NOANGELSS x Cuffed business card (front)</div>
+            </div>
+            <div class="carousel-item">
+                <img src="noangelss_x_cuffed_2.jpg" alt="noangelss_x_cuffed_2">
+                <div class="carousel-description">NOANGELSS x Cuffed business card (back)</div>
+            </div>
+            <div class="carousel-item">
+                <img src="noagelss_print.png" alt="noagelss_print">
+                <div class="carousel-description">print by NOANGELSS</div>
+            </div>
+        </div>
+    </div>
+
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/Rtd_UByv6wY?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    <script>
+        const track = document.querySelector('.carousel');
+        const images = Array.from(track.children);
+        const imageHeight = 480; // Same height as the carousel container
+        let currentIndex = 0;
+        let isTransitioning = false;
+
+        function updateCarousel() {
+            if (isTransitioning) return; // Prevent overlapping transitions
+            isTransitioning = true;
+
+            // Move to the next image and description
+            currentIndex = (currentIndex + 1) % images.length; // Loop back to the first item
+            track.style.transform = `translateY(-${currentIndex * imageHeight}px)`; // Use translateY for vertical scrolling
+
+            // Allow interaction again after the transition
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500); // Match transition duration (0.5s)
+        }
+
+        // Change image on tap
+        track.addEventListener('click', (event) => {
+            // Check if the last image was clicked
+            if (event.target.closest('.carousel-item:last-child')) {
+                window.location.href = 'index.html'; // Redirect to index.html
+            } else {
+                updateCarousel(); // Otherwise, move to the next item
+            }
+        });
+    </script>
+</body>
+</html>
