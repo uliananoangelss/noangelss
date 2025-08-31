@@ -1,7 +1,8 @@
 body {
     margin: 0;
     background-color: black; /* Solid black background */
-    font-family: 'Courier New', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
     text-transform: lowercase;
     color: #cccccc;
     height: 100vh;
