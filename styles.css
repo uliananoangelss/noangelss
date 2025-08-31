@@ -3,7 +3,7 @@ body {
     background-color: black; /* Solid black background */
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
-    text-transform: lowercase;
+    text-transform: uppercase;
     color: #cccccc;
     height: 100vh;
     display: flex;
