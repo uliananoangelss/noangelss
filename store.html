@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NOANGELSS — Store</title>
+  <style>
+    :root { --white: #FFFFFF; --black: #000000; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 700; /* Bold */
+      overflow: hidden; /* no scroll */
+    }
+
+    .screen {
+      position: relative;
+      height: 100vh; /* full viewport */
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .title {
+      font-size: 28px;
+      line-height: 1;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      text-align: center;
+    }
+
+    .back {
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      font-size: 16px;
+      line-height: 1;
+      color: var(--white);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .back:hover { text-decoration: underline; text-underline-offset: 4px; }
+  </style>
+</head>
+<body>
+  <main class="screen" role="main">
+    <h1 class="title">COMING SOON</h1>
+    <a class="back" href="index.html" aria-label="Back to home">BACK</a>
+  </main>
+</body>
+</html>

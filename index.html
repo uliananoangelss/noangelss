@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NOANGELSS — Landing</title>
+  <style>
+    :root { --white:#FFFFFF; --red:#FF2A2A; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      background: #000 url('NOANGELSS LANDING PHOTO.png') center / cover no-repeat fixed;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 700; /* Bold */
+      color: var(--white);
+    }
+    /* Header navigation */
+    .header {
+      position: fixed; inset: 0 0 auto 0;
+      padding: 24px 56px;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      z-index: 10;
+    }
+    .nav-left, .nav-right { font-size: 28px; line-height: 1; letter-spacing: 0.02em; }
+    .nav-left { justify-self: start; display: flex; align-items: center; }
+    .nav-right { justify-self: end; }
+    .nav-center { justify-self: center; transition: opacity .3s ease, transform .3s ease; }
+
+    a, .nav-button { color: var(--white); text-decoration: none; cursor: pointer; font-weight: 700; }
+    a:hover, .nav-button:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    .logo { display: block; height: 84px; width: auto; }
+
+    /* Live red dot indicator */
+    #live-indicator {
+      display: inline-block; width: 1em; height: 1em; border-radius: 50%;
+      background: var(--red); margin-left: 1ch;
+      transform: scale(0); transition: transform .2s ease;
+    }
+    #live-indicator.on { transform: scale(1); }
+
+    main.fullscreen { min-height: 100vh; }
+
+    #yt-player { position: fixed; width: 1px; height: 1px; bottom: 0; left: 0; opacity: 0; pointer-events: none; }
+
+    /* === Task 2: bottom ticker === */
+    .ticker {
+      /* now sits BELOW the fullscreen photo; not visible on first screen */
+      position: static;
+      background: #FFFFFF; color: #000000;
+      padding: 0; /* no vertical padding to keep rows tight */
+      border-top: 1px solid rgba(0,0,0,.08);
+      text-transform: uppercase;
+      user-select: none;
+    }
+    .ticker-row { overflow: hidden; margin: 0; padding: 0; }
+
+    .ticker-row.row-1 { font-size: 20px; line-height: 1; }
+    .ticker-row.row-2 { font-size: 16px; line-height: 1; }
+    .ticker-row.row-3 { font-size: 14px; line-height: 1; }
+
+    .ticker-track { display: inline-flex; align-items: center; white-space: nowrap; will-change: transform; gap: 24px; }
+    .ticker-item { display: inline-block; }
+
+    @keyframes marquee-left {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes marquee-right {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+    .marquee { display: flex; width: 200%; }
+    .marquee .half { width: 50%; display: inline-flex; align-items: center; gap: 24px; white-space: nowrap; }
+
+    .dir-l { animation: marquee-left var(--speed, 25s) linear infinite; }
+    .dir-r { animation: marquee-right var(--speed, 22s) linear infinite; }
+      /* === Task 3: second fullscreen section === */
+    .section-2 { position: relative; width: 100%; height: 100vh; background: #000 url('LANDING PHOTO 2.png') center / cover no-repeat; }
+    .section-2 .overlay-stars { position: absolute; inset: 0; display: block; overflow: hidden; }
+    .section-2 .overlay-stars img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; will-change: transform; }
+    .section-2 .overlay-stars:hover img { transform: scale(1.04); }
+
+    .section-2 .bottom-ui { position: absolute; left: 0; right: 0; bottom: 24px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 16px; padding: 0 56px; color: #FFFFFF; }
+
+    .section-2 .action-link { font-size: 28px; color: #FFFFFF; text-decoration: none; line-height: 1; }
+    .section-2 .action-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .section-2 .action-label { font-size: 14px; color: #FFFFFF; margin-bottom: 0; line-height: 1; }
+
+    .section-2 .socials { list-style: none; padding: 0; margin: 0; display: flex; gap: 20px; align-items: center; justify-content: center; }
+    .section-2 .socials img { height: 40px; width: auto; display: block; }
+      /* hide center logo on scroll */
+    body.logo-hidden .nav-center { opacity: 0; transform: translateY(-4px) scale(.98); pointer-events: none; }
+  </style>
+</head>
+<body>
+  <header class="header" role="banner">
+    <div class="nav-left">
+      <span id="live-btn" class="nav-button" role="button" aria-pressed="false" tabindex="0">LIVE</span>
+      <span id="live-indicator" aria-hidden="true"></span>
+    </div>
+    <div class="nav-center">
+      <a href="https://ffm.bio/noangelss" id="logo-link" aria-label="NOANGELSS link">
+        <img src="NOANGELSS WHITE LOGO.png" alt="NOANGELSS" class="logo" />
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="store.html" class="nav-button">STORE</a>
+    </div>
+  </header>
+
+  <main class="fullscreen" aria-hidden="true"></main>
+
+  <!-- Task 2: Bottom ticker (only 3 rows, minimal spacing) -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-row row-1">
+      <div class="marquee dir-l" style="--speed: 28s; animation-delay: -3s;">
+        <div class="half">
+          <span class="ticker-item">ULIANA NOANGELSS</span><span class="ticker-item">ULIANA NOANGELSS</span><span class="ticker-item">ULIANA NOANGELSS</span><span class="ticker-item">ULIANA NOANGELSS</span><span class="ticker-item">ULIANA NOANGELSS</span><span class="ticker-item">ULIANA NOANGELSS</span>
+        </div>
+        <div class="half">
+          <span class="ticker-item">ULIANA NOANGELSS</span><span class="ticker-item">ULIANA NOANGELSS</span><span class="ticker-item">ULIANA NOANGELSS</span><span class="ticker-item">ULIANA NOANGELSS</span><span class="ticker-item">ULIANA NOANGELSS</span><span class="ticker-item">ULIANA NOANGELSS</span>
+        </div>
+      </div>
+    </div>
+    <div class="ticker-row row-2">
+      <div class="marquee dir-r" style="--speed: 24s; animation-delay: -6s;">
+        <div class="half">
+          <span class="ticker-item">LOCAL BUSY BODY</span><span class="ticker-item">LOCAL BUSY BODY</span><span class="ticker-item">LOCAL BUSY BODY</span><span class="ticker-item">LOCAL BUSY BODY</span><span class="ticker-item">LOCAL BUSY BODY</span><span class="ticker-item">LOCAL BUSY BODY</span><span class="ticker-item">LOCAL BUSY BODY</span>
+        </div>
+        <div class="half">
+          <span class="ticker-item">LOCAL BUSY BODY</span><span class="ticker-item">LOCAL BUSY BODY</span><span class="ticker-item">LOCAL BUSY BODY</span><span class="ticker-item">LOCAL BUSY BODY</span><span class="ticker-item">LOCAL BUSY BODY</span><span class="ticker-item">LOCAL BUSY BODY</span><span class="ticker-item">LOCAL BUSY BODY</span>
+        </div>
+      </div>
+    </div>
+    <div class="ticker-row row-3">
+      <div class="marquee dir-l" style="--speed: 30s; animation-delay: -2s;">
+        <div class="half">
+          <span class="ticker-item">OFFLINE INFLUENCER</span><span class="ticker-item">OFFLINE INFLUENCER</span><span class="ticker-item">OFFLINE INFLUENCER</span><span class="ticker-item">OFFLINE INFLUENCER</span><span class="ticker-item">OFFLINE INFLUENCER</span><span class="ticker-item">OFFLINE INFLUENCER</span><span class="ticker-item">OFFLINE INFLUENCER</span>
+        </div>
+        <div class="half">
+          <span class="ticker-item">OFFLINE INFLUENCER</span><span class="ticker-item">OFFLINE INFLUENCER</span><span class="ticker-item">OFFLINE INFLUENCER</span><span class="ticker-item">OFFLINE INFLUENCER</span><span class="ticker-item">OFFLINE INFLUENCER</span><span class="ticker-item">OFFLINE INFLUENCER</span><span class="ticker-item">OFFLINE INFLUENCER</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Task 3: Second fullscreen section with overlay -->
+  <section class="section-2" aria-label="NOANGELSS section 2">
+    <a href="https://ffm.bio/noangelss" class="overlay-stars" aria-label="NOANGELSS starry sky link">
+      <img src="NOANGELSS STARRY SKY.png" alt="NOANGELSS STARRY SKY" />
+    </a>
+
+    <div class="bottom-ui">
+      <div class="action-left">
+        <div class="action-label">(PAY ME DIRECTLY)</div>
+        <a href="https://noangelss.bandcamp.com/" class="action-link">BUY MY MUSIC</a>
+      </div>
+
+      <ul class="socials">
+        <li><a href="https://x.com/noangelss" aria-label="X"><img src="X LOGO.png" alt="X logo"></a></li>
+        <li><a href="https://www.tiktok.com/@noangelss.live" aria-label="TikTok"><img src="TIKTOK LOGO.png" alt="TikTok logo"></a></li>
+        <li><a href="https://www.instagram.com/uliananoangelss/" aria-label="Instagram"><img src="INSTAGRAM LOGO.png" alt="Instagram logo"></a></li>
+        <li><a href="https://www.youtube.com/@noangelss" aria-label="YouTube"><img src="YOUTUBE LOGO.png" alt="YouTube logo"></a></li>
+      </ul>
+
+      <div class="action-right" style="text-align:right">
+        <div class="action-label">(PAY SPOTIFY AND APPLE)</div>
+        <a href="https://ffm.bio/noangelss" class="action-link">STREAM MY MUSIC</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="yt-player"></div>
+
+<script>
+  // instant play + корректный toggle (play/pause)
+  const YT_VIDEO_ID = 'l_Obv7Amjwc'; // из твоей ссылки https://youtu.be/l_Obv7Amjwc?feature=shared
+
+  let ytReady = false, player = null, playerReady = false;
+  let isPlaying = false;         // фактическое состояние (для UI)
+  let shouldPlay = false;        // желаемое состояние (учитывает клики до готовности API)
+
+  function onYouTubeIframeAPIReady() {
+    ytReady = true;
+    if (!player) initPlayer(shouldPlay); // создаём сразу; если shouldPlay=true — автозапуск
+  }
+  (function () {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+  })();
+
+  const liveBtn = document.getElementById('live-btn');
+  const indicator = document.getElementById('live-indicator');
+
+  function updateUI() {
+    indicator.classList.toggle('on', isPlaying);
+    indicator.style.transform = isPlaying ? 'scale(1)' : 'scale(0)';
+    liveBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+  }
+
+  function initPlayer(autoplayOnCreate = false) {
+    player = new YT.Player('yt-player', {
+      videoId: YT_VIDEO_ID,
+      playerVars: {
+        autoplay: autoplayOnCreate ? 1 : 0,
+        playsinline: 1,
+        controls: 0,
+        rel: 0
+        // ВАЖНО: без origin при локальном открытии файла
+      },
+      events: {
+        onReady: (e) => {
+          playerReady = true;
+          if (shouldPlay) {
+            try { e.target.playVideo(); } catch (_) {}
+            isPlaying = true;
+            updateUI();
+          }
+        }
+      }
+    });
+  }
+
+  function toggleLive() {
+    if (isPlaying) {
+      // Пауза по повторному клику
+      shouldPlay = false;
+      try { player && player.pauseVideo(); } catch (_) {}
+      isPlaying = false;
+      updateUI();
+      return;
+    }
+
+    // Воспроизведение
+    shouldPlay = true;
+
+    if (ytReady) {
+      if (!player) {
+        // Создаём плеер в жесте пользователя c autoplay
+        initPlayer(true);
+      } else {
+        try { player.playVideo(); } catch (_) {}
+        isPlaying = true;
+        updateUI();
+      }
+    } else {
+      // API ещё не готов — дождёмся; onYouTubeIframeAPIReady создаст плеер и автозапустит
+    }
+  }
+
+  liveBtn.addEventListener('click', toggleLive);
+  liveBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleLive();
+    }
+  });
+
+  // (оставлено как есть) скрытие центрального лого при скролле
+  function toggleCenterLogo() {
+    if (window.scrollY > 0) {
+      document.body.classList.add('logo-hidden');
+    } else {
+      document.body.classList.remove('logo-hidden');
+    }
+  }
+  window.addEventListener('scroll', toggleCenterLogo, { passive: true });
+  window.addEventListener('load', toggleCenterLogo);
+</script>
+</body>
+</html>
